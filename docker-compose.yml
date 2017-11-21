@@ -1,0 +1,18 @@
+# postgresql
+db:
+  image: postgres:9.5.4
+  container_name: postgres_django_sample
+  ports:
+    - "5432:5432"
+
+# django_sample
+web:
+  build: .
+  container_name: django_sample
+  links:
+    - db:postgres_django_sample
+  ports:
+    - "8080:80"
+  volumes:
+    - ../django_sample:/home/ubuntu/www/django_sample
+  tty: true
